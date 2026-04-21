@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма оплаты</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h2 { color: #21092f; margin-bottom: 25px; }
+
+        label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            color: #5e7a7d;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #dfdee0;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #21092f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        
+        #output-area {
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: #f3f9fa;
+            border-left: 5px solid #21092f;
+            padding: 15px;
+            border-radius: 4px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Payment Details</h2>
+        
+        <label>Cardholder Name</label>
+        <input type="text" id="nameInput" placeholder="e.g Jane Applessed">
+
+        <label>Card Number</label>
+        <input type="text" id="numInput" placeholder="0000 0000 0000 0000">
+
+        <button class="confirm-btn" id="saveBtn">Confirm</button>
+
+        <div id="output-area"></div>
+    </div>
+
+    <script>
+        const btn = document.querySelector("#saveBtn");
+        const output = document.querySelector("#output-area");
+
+        btn.addEventListener("click", function() {
+            
+            const name = document.querySelector("#nameInput").value;
+            const number = document.querySelector("#numInput").value;
+
+            
+            if (name === "" || number === "") {
+                alert("Заполните все поля!");
+                return;
+            }
+
+            
+            output.innerHTML = "";
+
+            
+            let infoBox = document.createElement("div");
+            infoBox.classList.add("info-card");
+
+            infoBox.innerHTML = `
+                <h4>Данные приняты:</h4>
+                <p><strong>Владелец:</strong> ${name}</p>
+                <p><strong>Номер:</strong> ${number}</p>
+                <small>Статус: Обработка...</small>
+            `;
+
+            output.appendChild(infoBox);
+        });
+    </script>
+
+</body>
+</html>
